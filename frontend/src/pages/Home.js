@@ -14,7 +14,7 @@ const Home = () => {
       <BannerProduct/>
       <VerticalCardProduct category={"women"} heading={"Top's Woman Fashoin"}/>
       {/* <HorizontalCardProduct category={"woman"} heading={"Top's Woman Fasion"}/> */}
-      <HorizontalCardProduct category={"airpodes"} heading={"Top's Airpodes"}/>
+      <HorizontalCardProduct category={"footwear"} heading={"Top's Footwear"}/>
       <HorizontalCardProduct category={"watches"} heading={"Popular's Watches"}/>
 
       <VerticalCardProduct category={"mobiles"} heading={"Mobiles"}/>

@@ -189,7 +189,7 @@ const Wish = () => {
                             <div className='p-4'>
                                 <h3 className='text-lg font-medium'>{product?.productId?.productName}</h3>
                                 <p className='text-slate-500'>{product?.productId?.category}</p>
-                                <div className='flex justify-between items-center mt-2'>
+                                <div className='flex justify-between gap-1 items-center mt-2'>
                                     <p className='text-red-600 font-medium'>
                                         {displayINRCurrency(product?.productId?.sellingPrice)}
                                     </p>
@@ -202,7 +202,7 @@ const Wish = () => {
                                     onClick={(e) => deleteFromWishlist(product?._id)} // Use the handler to remove the product
                                 >
                                     <FaHeart className='mr-2 text-white' />
-                                    Remove from Wishlist
+                                    Remove
                                 </button>
                                 {/* <button 
                                         className='text-sm md:px-16 px-3 md:py-0.5 py-1 bg-red-600 hover:bg-red-700 text-white rounded-full w-full md:w-auto' 

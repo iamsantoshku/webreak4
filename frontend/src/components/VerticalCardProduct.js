@@ -1,6 +1,7 @@
 
 
 
+
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import fetchCategoryWiseProduct from '../helpers/fetchCategoryWiseProduct';
 import displayINRCurrency from '../helpers/displayCurrency';
@@ -61,8 +62,8 @@ const VerticalCardProduct = ({ category, heading }) => {
 
                 {loading ? (
                     loadingList.map((_, index) => (
-                        <div key={index} className='w-full min-w-[200px] md:min-w-[240px] max-w-[200px] md:max-w-[240px] bg-white rounded-sm shadow'>
-                            <div className='bg-slate-200 h-48 p-4 min-w-[200px] md:min-w-[145px] flex justify-center items-center animate-pulse'></div>
+                        <div key={index} className='w-full min-w-[160px] md:min-w-[240px] max-w-[160px] md:max-w-[240px] bg-white rounded-sm shadow'>
+                            <div className='bg-slate-200 h-48 p-4 flex justify-center items-center animate-pulse'></div>
                             <div className='p-4 grid gap-1'>
                                 <h2 className='font-medium text-base md:text-lg text-ellipsis line-clamp-1 text-black p-1 py-1 animate-pulse rounded-full bg-slate-200'></h2>
                                 <p className='capitalize text-slate-500 p-1 animate-pulse rounded-full bg-slate-200 py-1'></p>
@@ -75,7 +76,7 @@ const VerticalCardProduct = ({ category, heading }) => {
                     ))
                 ) : (
                     data.map((product, index) => (
-                        <div key={index} className='w-full min-w-[200px] md:min-w-[240px] max-w-[200px] md:max-w-[240px] bg-white rounded-sm shadow relative'> 
+                        <div key={index} className='w-full min-w-[160px] md:min-w-[240px] max-w-[160px] md:max-w-[240px] bg-white rounded-sm shadow relative'> 
                             <Link to={`/product/${product?._id}`} className='block'>
                                 <ImageHoverSlider images={product.productImage} productName={product?.productName} />
                             </Link>
@@ -91,9 +92,8 @@ const VerticalCardProduct = ({ category, heading }) => {
                                 <h2 className='font-medium text-base md:text-lg text-ellipsis line-clamp-1 text-black'>{product?.productName}</h2>
                                 <p className='capitalize text-slate-500'>{product?.category}</p>
                                 <div className='flex flex-row md:flex-row md:gap-4'>
-                                <p className='text-slate-500 line-through'>{displayINRCurrency(product?.price)}</p>
+                                    <p className='text-slate-500 line-through'>{displayINRCurrency(product?.price)}</p>
                                     <p className='text-red-600 font-medium'>{displayINRCurrency(product?.sellingPrice)}</p>
-                                    
                                 </div>
                             </div>
                         </div>
@@ -129,7 +129,7 @@ const ImageHoverSlider = ({ images, productName }) => {
 
     return (
         <div
-            className='bg-slate-200 h-72 p-4 min-w-[200px] md:min-w-[145px] flex justify-center items-center'
+            className='bg-slate-200 h-56 md:h-72 p-4 min-w-[160px] md:min-w-[145px] flex justify-center items-center'
             onMouseEnter={startImageRotation}
             onMouseLeave={stopImageRotation}
         >
