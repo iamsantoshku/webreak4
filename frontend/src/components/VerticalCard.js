@@ -72,7 +72,7 @@ const VerticalCard = ({ loading, data = [] }) => {
                             <p className='capitalize text-slate-500'>
                                 {product?.category}
                             </p>
-                            <div className='flex gap-3'>
+                            <div className='flex gap-1 -ml-3'>
                                 <p className='text-red-600 font-medium'>
                                     {displayINRCurrency(product?.sellingPrice)}
                                 </p>

@@ -63,7 +63,7 @@ const CategroyWiseProductDisplay = ({ category, heading }) => {
                             <div className='p-4 grid gap-1'>
                                 <h2 className='font-medium text-base text-ellipsis line-clamp-1 text-black'>{product?.productName}</h2>
                                 <p className='capitalize text-slate-500'>{product?.category}</p>
-                                <div className='flex gap-2'>
+                                <div className='flex gap-1 -ml-3'>
                                     <p className='text-red-600 font-medium'>{displayINRCurrency(product?.sellingPrice)}</p>
                                     <p className='text-slate-500 line-through'>{displayINRCurrency(product?.price)}</p>
                                 </div>
