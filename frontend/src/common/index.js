@@ -8,7 +8,7 @@ const SummaryApi = {
         method : "post"
     },
     front :{
-        url2 : `http://localhost:3000/`
+        url2 : `https://webreak4-frontend.onrender.com/`
     },
     
     signIn : {
