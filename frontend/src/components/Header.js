@@ -94,11 +94,21 @@ const Header = () => {
   return (
     <header className='h-10 lg:h-20 ls:h-10 shadow-md bg-white fixed w-full z-40'>
       <div className='h-full container mx-auto flex items-center px-4 justify-between'>
-        <div className='logoname'>
-          <Link to={"/"}>
-            <h2>WebReak</h2>
-          </Link>
-        </div>
+        // <div className='logoname'>
+        //   <Link to={"/"}>
+        //     <h2>WebReak</h2>
+        //   </Link>
+        // </div>
+
+       <div className=" p-4 flex items-center justify-center">
+  <Link to="/">
+    <img 
+      src={logo} 
+      alt="logo" 
+      className="h-10 w-auto sm:h-12 md:h-14 lg:h-16 transition-transform duration-200 transform hover:scale-105"
+    />
+  </Link>
+</div>
 
         {/** Desktop search bar */}
         <div className='hidden lg:flex items-center w-full justify-between max-w-sm border rounded-full focus-within:shadow pl-2'>
