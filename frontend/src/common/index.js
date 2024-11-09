@@ -8,7 +8,7 @@ const SummaryApi = {
         method : "post"
     },
     front :{
-        url2 : `https://webreak4-frontend.onrender.com/`
+        url2 : `https://fashomart.com/`
     },
     
     signIn : {
@@ -97,18 +97,33 @@ const SummaryApi = {
         url : `${backendDomin}/api/filter-product`,
         method : 'post'
     },
-    payment : {
-        url : `${backendDomin}/api/checkout`,
-        method : 'post'
-    }
     // payment : {
-    //     url : `${backendDomin}/api/create-checkout-session`,
-    //     method :'post'
+    //     url : `${backendDomin}/api/checkout`,
+    //     method : 'post'
     // },
-    // paymentsuc :{
-    //     url : `${backendDomin}/api/confirm-payment`,
-    //     method : `post`
-    // }
+    payment : {
+        url : `${backendDomin}/api/create-order`,
+        method : 'post'
+    },
+    orderdet:{
+        url : `${backendDomin}/api/orders`,
+        method : 'get'
+    },
+    userOrders: { // New entry for user orders
+        url: `${backendDomin}/api/orders-det`, 
+        method: 'get'
+    },
+    orderdetadmin:{       
+        url : `${backendDomin}/api/ordersdet-admin`,
+        method : 'get'
+    },
+    updateOrderStatus:{
+        url : `${backendDomin}/api/update-status`,
+        method : 'put'
+    }
+    
+    
+    
 }
 
 

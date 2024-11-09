@@ -218,3 +218,327 @@
 //     res.status(500).json({ message: "Server error" });
 //   }
 // };
+
+
+
+
+// const express = require('express');
+// const Order = require('../../models/orderProductModel');
+// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+// // const router = express.Router();
+
+// async function createOrder(req, res) {
+//     const { userId, cartItems, shippingAddress } = req.body;
+
+//     // Calculate the total amount
+//     const totalAmount = cartItems.reduce(
+//         (total, item) => total + item.quantity * item.productId.sellingPrice,
+//         0
+//     );
+
+//     try {
+//         // Create Stripe session
+//         const session = await stripe.checkout.sessions.create({
+//             payment_method_types: ['card'],
+//             line_items: cartItems.map((item) => ({
+//                 price_data: {
+//                     currency: 'inr',
+//                     product_data: {
+//                         name: item.productId.productName,
+//                     },
+//                     unit_amount: item.productId.sellingPrice * 100, // Convert to paisa
+//                 },
+//                 quantity: item.quantity,
+//             })),
+//             mode: 'payment',
+//             success_url: `${process.env.FRONTEND_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+//             cancel_url: `${process.env.FRONTEND_URL}/cancel`,
+//         });
+
+//         // Save order in the database
+//         const order = new Order({
+//             userId,
+//             products: cartItems.map((item) => ({
+//                 productId: item.productId._id,
+//                 quantity: item.quantity,
+//             })),
+//             totalAmount,
+//             shippingAddress,
+//             status: 'Pending',
+//         });
+
+//         await order.save();
+
+//         // Return session ID for Stripe redirection
+//         res.status(200).json({ success: true, sessionId: session.id });
+//     } catch (error) {
+//         console.error('Error creating order:', error);
+//         res.status(500).json({ success: false, message: 'Could not create order' });
+//     }
+// }
+
+// module.exports = { createOrder };
+
+// routes/order.js
+// const express = require('express');
+// // const Order = require('../models/Order');
+// const Order = require('../../models/orderProductModel');
+// const userModel = require('../../models/userModel')
+// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
+
+// const orderController = async (req, res) => {
+//     const { userId, cartItems, shippingAddress } = req.body;
+
+//     if (!userId) {
+//         return res.status(400).json({ success: false, message: 'User ID is required' });
+//     }
+
+//     const totalAmount = cartItems.reduce(
+//         (total, item) => total + item.quantity * item.productId.sellingPrice,
+//         0
+//     );
+
+//     try {
+//         const session = await stripe.checkout.sessions.create({
+//             payment_method_types: ['card'],
+//             line_items: cartItems.map((item) => ({
+//                 price_data: {
+//                     currency: 'inr',
+//                     product_data: { name: item.productId.productName },
+//                     unit_amount: item.productId.sellingPrice * 100,
+//                 },
+//                 quantity: item.quantity,
+//             })),
+//             mode: 'payment',
+//             success_url: `${process.env.FRONTEND_URL}/success`,
+//             cancel_url: `${process.env.FRONTEND_URL}/cancel`,
+//         });
+
+//         const order = new Order({
+//             userId,  // Ensure userId is used here
+//             products: cartItems.map((item) => ({
+//                 productId: item.productId._id,
+//                 quantity: item.quantity,
+//             })),
+//             totalAmount,
+//             shippingAddress,
+//             status: 'Pending',
+//         });
+
+//         await order.save();
+
+//         res.status(200).json({ success: true, sessionId: session.id });
+//     } catch (error) {
+//         console.error('Error creating order:', error);
+//         res.status(500).json({ success: false, message: 'Could not create order' });
+//     }
+// };
+
+// module.exports = orderController;
+
+
+
+
+// const express = require('express');
+// const Order = require('../../models/orderProductModel'); // Ensure the correct model is imported
+// const userModel = require('../../models/userModel');
+// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
+// const orderController = async (req, res) => {
+//     const { userId, cartItems, shippingAddress } = req.body;
+
+//     if (!userId) {
+//         return res.status(400).json({ success: false, message: 'User ID is required' });
+//     }
+
+//     const totalAmount = cartItems.reduce(
+//         (total, item) => total + item.quantity * item.productId.sellingPrice,
+//         0
+//     );
+
+//     try {
+//         // Create a Stripe session
+//         const session = await stripe.checkout.sessions.create({
+//             payment_method_types: ['card'],
+//             line_items: cartItems.map((item) => ({
+//                 price_data: {
+//                     currency: 'inr',
+//                     product_data: { name: item.productId.productName },
+//                     unit_amount: item.productId.sellingPrice * 100,
+//                 },
+//                 quantity: item.quantity,
+//             })),
+//             mode: 'payment',
+//             success_url: `${process.env.FRONTEND_URL}/success`,
+//             cancel_url: `${process.env.FRONTEND_URL}/cancel`,
+//         });
+
+//         // Create the order only if session creation was successful
+//         const order = new Order({
+//             orderId: session.id, // Optionally you could use a UUID or other unique identifier
+//             userId,
+//             products: cartItems.map((item) => ({
+//                 productId: item.productId._id,
+//                 quantity: item.quantity,
+//             })),
+//             totalAmount,
+//             shippingAddress,
+//             status: 'Pending',
+//         });
+
+//         await order.save(); // Save the order
+
+//         res.status(200).json({ success: true, sessionId: session.id });
+//     } catch (error) {
+//         console.error('Error creating order:', error);
+//         res.status(500).json({ success: false, message: 'Could not create order' });
+//     }
+// };
+
+// module.exports = orderController;
+
+
+
+const express = require('express');
+const Order = require('../../models/orderProductModel'); // Ensure the correct model is imported
+const userModel = require('../../models/userModel');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
+const orderController = async (req, res) => {
+    const { userId, cartItems, shippingAddress } = req.body;
+
+    if (!userId) {
+        return res.status(400).json({ success: false, message: 'User ID is required' });
+    }
+
+    const totalAmount = cartItems.reduce(
+        (total, item) => total + item.quantity * item.productId.sellingPrice,
+        0
+    );
+
+    try {
+        // Create a Stripe session
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: cartItems.map((item) => ({
+                price_data: {
+                    currency: 'inr',
+                    product_data: { name: item.productId.productName,
+                        images: Array.isArray(item.productId.productImage)
+                        ? item.productId.productImage
+                        : [item.productId.productImage]
+                    },
+                    unit_amount: item.productId.sellingPrice * 100,
+                },
+                quantity: item.quantity,
+            })),
+            mode: 'payment',
+            success_url: `${process.env.FRONTEND_URL}/success`,
+            cancel_url: `${process.env.FRONTEND_URL}/cancel`,
+        });
+
+        // Create the order only if session creation was successful
+        const order = new Order({
+            orderId: session.id,
+            userId,
+            products: cartItems.map((item) => ({
+                productId: item.productId._id,
+                quantity: item.quantity,
+                productName: item.productId.productName,
+                // productimage: item.image, // Assuming `images` is an array
+                productImage:item.productId.productImage
+                // productId
+            })),
+            totalAmount,
+            shippingAddress,
+            status: 'Pending',
+        });
+
+        await order.save(); // Save the order
+
+        res.status(200).json({ success: true, sessionId: session.id });
+    } catch (error) {
+        console.error('Error creating order:', error);
+        res.status(500).json({ success: false, message: 'Could not create order' });
+    }
+};
+
+
+// const orderController = async (req, res) => {
+//     const { userId, cartItems, shippingAddress } = req.body;
+
+//     if (!userId) {
+//         return res.status(400).json({ success: false, message: 'User ID is required' });
+//     }
+
+//     try {
+//         // Populate the product data in cartItems
+//         const populatedCartItems = await Promise.all(
+//             cartItems.map(async (item) => {
+//                 const product = await Product.findById(item.productId).select('productName images sellingPrice');
+//                 if (!product) {
+//                     throw new Error(`Product with ID ${item.productId} not found.`);
+//                 }
+//                 return {
+//                     productId: product._id,
+//                     productName: product.productName,
+//                     productImage: product.images, // Ensure `images` is correctly assigned here
+//                     quantity: item.quantity,
+//                 };
+//             })
+//         );
+
+//         // Calculate total amount
+//         const totalAmount = populatedCartItems.reduce(
+//             (total, item) => total + item.quantity * item.productId.sellingPrice,
+//             0
+//         );
+
+//         // Create a Stripe session
+//         const session = await stripe.checkout.sessions.create({
+//             payment_method_types: ['card'],
+//             line_items: populatedCartItems.map((item) => ({
+//                 price_data: {
+//                     currency: 'inr',
+//                     product_data: { name: item.productName },
+//                     unit_amount: item.productId.sellingPrice * 100,
+//                 },
+//                 quantity: item.quantity,
+//             })),
+//             mode: 'payment',
+//             success_url: `${process.env.FRONTEND_URL}/success`,
+//             cancel_url: `${process.env.FRONTEND_URL}/cancel`,
+//         });
+
+//         if (!session.id) {
+//             throw new Error('Failed to create Stripe session.');
+//         }
+
+//         // Create the order in the database
+//         const order = new Order({
+//             orderId: session.id,
+//             userId,
+//             products: populatedCartItems,
+//             totalAmount,
+//             shippingAddress,
+//             status: 'Pending',
+//         });
+
+//         await order.save(); // Save the order
+
+//         res.status(200).json({ success: true, sessionId: session.id });
+//     } catch (error) {
+//         console.error('Error creating order:', error.message);
+//         res.status(500).json({ success: false, message: `Could not create order: ${error.message}` });
+//     }
+// };
+
+module.exports = orderController;
+
+
+
+
+
+
+module.exports = orderController;

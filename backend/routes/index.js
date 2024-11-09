@@ -35,7 +35,17 @@ const deleteToWishlistProduct = require('../controller/user/deleteToWishlistProd
 // const countAddToWishlistProduct = require('../../controllers/countAddToWishlistProduct');
 // const updateAddToWishlistProduct = require('../../controllers/updateAddToWishlistProduct');
 // import { createCheckoutSession , confirmPayment, getOrderById, getOrdersByEmail, getAllOrders, updateOrderStatus, deleteOrder} from '../controller/order/orderController';
-const orderController = require("../controller/order/orderController");
+// const orderController = require("../controller/order/orderController");
+const orderController = require("../controller/order/orderController")
+const getAllOrders = require("../controller/order/getAllOrders")
+const getUserOrders = require("../controller/order/getUserOrders")
+const getOrderDetails = require("../controller/order/getOrderDetails")
+const updateOrderStatus = require("../controller/order/updateOrderStatus")
+
+
+
+// const { createOrder } = require("../controller/order/orderController");
+
 
 
 
@@ -78,7 +88,13 @@ router.delete('/wishlist/delete',authToken, deleteToWishlistProduct);
 
 
 
-router.post('/checkout', authToken, paymentController)
+// router.post('/checkout', authToken, paymentController)
+router.post('/create-order', orderController);
+router.get('/orders', getAllOrders);
+router.get('/ordersdet-admin',authToken, getOrderDetails);
+
+router.get('/orders-det',authToken, getUserOrders); 
+router.put('/update-status/:orderId', updateOrderStatus)
 // router.post('/webhook', webhooks) // api webhooks
 
 

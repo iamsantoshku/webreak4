@@ -24,9 +24,14 @@ import Wish from '../pages/Wish'
 import Dasboard2 from '../pages/Dasboard2'
 import UserDashboard from '../pages/UserDashboard'
 import Profile from '../components/userdasboard/Profile'
-// import Payment from '../pages/Payment'
+import OrderListPage from '../pages/OrderListPage'
+import Orderdetailsadmin from '../pages/Orderdetailsadmin'
+// import OrderWrapper from '../components/OrderWrapper'
+
 
 const router = createBrowserRouter([
+
+    
     {
         path : "/",
         element : <App/>,
@@ -55,20 +60,7 @@ const router = createBrowserRouter([
                 path : "product/:id",
                 element : <ProductDetails/>
             },
-            
-            // {
-            //     path: "product/:productName",
-            //     element: <ProductDetails />
-            // },
-
-            // {
-            //     path: "product/:id/:productName",
-            //     element: <ProductDetails />
-            // },
-
-            
-               
-            
+                  
             {
                 path : 'cart',
                 element : <Cart/>
@@ -82,10 +74,10 @@ const router = createBrowserRouter([
                 element : <Success/>
 
             },
+            // 
             {
-                path : "order",
-                element : <Order/>
-
+                path: "order",
+                element: <Order /> 
             },
             {
                 path : "cancel",
@@ -105,13 +97,12 @@ const router = createBrowserRouter([
                 path:"user-dashboard/profile",
                 element:<Profile/>
             },
-            // {
-            //     path: "/payment",
-            //     element:<Payment/>
-            // },
+            {
+                path:"user-dashboard/orders",
+                element:<Order/>
 
-            // <Route path='/cart' element={<Cart />} />
-            // <Route path='/payment' element={<Payment />} />
+            },
+            
             
                       
             {
@@ -142,6 +133,15 @@ const router = createBrowserRouter([
                     {
                         path : "home2",
                         element : <Dasboard2/>
+                    },
+                    {
+                        path : "order-list",
+                        element : <OrderListPage/>
+                    },
+                    {
+                        path : "order-detail",
+                        element:<Orderdetailsadmin/>
+
                     }
                                                           
                 ]

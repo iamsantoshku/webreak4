@@ -350,7 +350,6 @@ const Cart = () => {
             console.error('Error deleting cart product:', error);
         }
     };
-
     const handlePayment = async () => {
         try {
             const stripe = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
@@ -361,22 +360,25 @@ const Cart = () => {
                     'content-type': 'application/json',
                 },
                 body: JSON.stringify({
+                    userId: context.user._id, // Ensure userId is added here
                     cartItems: data,
                     shippingAddress,
                 }),
             });
-
+    
             const responseData = await response.json();
-            if (responseData?.id && stripe) {
-                stripe.redirectToCheckout({ sessionId: responseData.id });
+            
+            // Use `sessionId` as returned by the API
+            if (responseData?.sessionId && stripe) {
+                stripe.redirectToCheckout({ sessionId: responseData.sessionId });
             } else {
-                console.error('Payment session ID is missing:', responseData);
+                console.error('Payment session ID is missing in response:', responseData);
             }
         } catch (error) {
             console.error('Error processing payment:', error);
         }
     };
-
+    
     const handleChange = (e) => {
         setShippingAddress({
             ...shippingAddress,
