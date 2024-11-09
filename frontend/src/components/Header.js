@@ -17,6 +17,7 @@ import ROLE from '../common/role';
 import Context from '../context';
 import logo from "../assest/fashomart logo 01.png"
 
+
 const Header = () => {
   const user = useSelector(state => state?.user?.user);
   const dispatch = useDispatch();
@@ -106,6 +107,8 @@ const Header = () => {
   </Link>
 </div>
 
+
+      
 
         {/** Desktop search bar */}
         <div className='hidden lg:flex items-center w-full justify-between max-w-sm border rounded-full focus-within:shadow pl-2'>
