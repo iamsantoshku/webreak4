@@ -15,6 +15,7 @@ import { toast } from 'react-toastify';
 import { setUserDetails } from '../store/userSlice';
 import ROLE from '../common/role';
 import Context from '../context';
+import logo from "../assest/fashomart logo 01.png"
 
 const Header = () => {
   const user = useSelector(state => state?.user?.user);
