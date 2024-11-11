@@ -194,6 +194,192 @@
 
 
 
+// import React, { useContext } from 'react';
+// import scrollTop from '../helpers/scrollTop';
+// import displayINRCurrency from '../helpers/displayCurrency';
+// import Context from '../context';
+// import addToWishlist from '../helpers/addToWishlist';
+// import { Link } from 'react-router-dom';
+// import { toast } from 'react-toastify';
+// import { FaHeart } from 'react-icons/fa';
+
+// const VerticalCard = ({ loading, data = [] }) => {
+//     const loadingList = new Array(13).fill(null);
+//     const { fetchUserAddToWishlist } = useContext(Context);
+
+//     const handleAddToWishlist = async (e, id) => {
+//         e.stopPropagation();
+//         const response = await addToWishlist(e, id);
+//         if (response.success) {
+//             toast.success("Product added to wishlist");
+//         } else {
+//             toast.error(response.message || "Failed to add to wishlist");
+//         }
+//     };
+
+//     return (
+//         <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 justify-center'>
+//             {loading ? (
+//                 loadingList.map((_, index) => (
+//                     <div
+//                         key={index}
+//                         className='w-full min-w-[170px] md:min-w-[200px] bg-white rounded-sm shadow-sm'
+//                     >
+//                         <div className='bg-slate-200 h-64 md:h-80 flex justify-center items-center animate-pulse'></div>
+//                         <div className='p-4 grid gap-2'>
+//                             <h2 className='font-medium text-base md:text-lg bg-slate-200 animate-pulse rounded-full h-6'></h2>
+//                             <p className='capitalize bg-slate-200 animate-pulse rounded-full h-4'></p>
+//                             <div className='flex gap-3'>
+//                                 <p className='text-red-600 font-medium bg-slate-200 animate-pulse rounded-full h-5 w-full'></p>
+//                                 <p className='text-slate-500 line-through bg-slate-200 animate-pulse rounded-full h-5 w-full'></p>
+//                             </div>
+//                         </div>
+//                     </div>
+//                 ))
+//             ) : (
+//                 data.map((product, index) => (
+//                     <Link
+//                         key={index}
+//                         to={"/product/" + product?._id}
+//                         className='relative w-full min-w-[170px] md:min-w-[200px] bg-white rounded-sm shadow-sm'
+//                         onClick={scrollTop}
+//                     >
+//                         {/* Wishlist Button Icon on the top-right corner */}
+//                         <button
+//                             className='absolute top-3 right-3 bg-white p-1 rounded-full shadow-md z-10'
+//                             onClick={(e) => handleAddToWishlist(e, product?._id)}
+//                         >
+//                             <FaHeart className='text-red-500 text-lg' />
+//                         </button>
+//                         <div className='h-60 md:h-72 p-0 flex justify-center items-center'>
+//                             <img
+//                                 src={product?.productImage[0]}
+//                                 className='object-cover h-full w-full rounded-sm transition-all transform hover:scale-105'
+//                                 alt={product?.productName}
+//                             />
+//                         </div>
+//                         <div className='p-4 grid gap-0'>
+//                             <div className='flex gap-1 mb-1'>
+//                                 <span className='bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-0.5 rounded'>ONLY ON FASHOMART</span>
+//                             </div>
+//                             <p className='text-sm text-black font-medium m-0 leading-tight'>{product?.brandName}</p>
+//                             <h2 className='text-sm md:text-base text-gray-700 line-clamp-1 m-0 leading-tight'>{product?.productName}</h2>
+//                             <p className='capitalize text-slate-500'>
+//                                 {product?.category}
+//                             </p>
+//                             <div className='flex gap-1 -ml-3 lg:ml-0'>
+//                                 <p className='text-red-600 font-medium'>
+//                                     {displayINRCurrency(product?.sellingPrice)}
+//                                 </p>
+//                                 <p className='text-slate-500 line-through'>
+//                                     {displayINRCurrency(product?.price)}
+//                                 </p>
+//                             </div>
+//                         </div>
+//                     </Link>
+//                 ))
+//             )}
+//         </div>
+//     );
+// };
+
+// export default VerticalCard;
+
+
+
+// import React, { useContext } from 'react';
+// import scrollTop from '../helpers/scrollTop';
+// import displayINRCurrency from '../helpers/displayCurrency';
+// import Context from '../context';
+// import addToWishlist from '../helpers/addToWishlist';
+// import { Link } from 'react-router-dom';
+// import { toast } from 'react-toastify';
+// import { FaHeart } from 'react-icons/fa';
+
+// const VerticalCard = ({ loading, data = [] }) => {
+//     const loadingList = new Array(13).fill(null);
+//     const { fetchUserAddToWishlist } = useContext(Context);
+
+//     const handleAddToWishlist = async (e, id) => {
+//         e.stopPropagation();
+//         const response = await addToWishlist(e, id);
+//         if (response.success) {
+//             toast.success("Product added to wishlist");
+//         } else {
+//             toast.error(response.message || "Failed to add to wishlist");
+//         }
+//     };
+
+//     return (
+//         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 justify-center'>
+//             {loading ? (
+//                 loadingList.map((_, index) => (
+//                     <div
+//                         key={index}
+//                         className='w-full min-w-[150px] md:min-w-[200px] bg-white rounded-sm shadow-sm'
+//                     >
+//                         <div className='bg-slate-200 h-52 md:h-80 flex justify-center items-center animate-pulse'></div>
+//                         <div className='p-3 sm:p-4 grid gap-2'>
+//                             <h2 className='font-medium text-sm md:text-lg bg-slate-200 animate-pulse rounded-full h-6'></h2>
+//                             <p className='capitalize bg-slate-200 animate-pulse rounded-full h-4'></p>
+//                             <div className='flex gap-3'>
+//                                 <p className='text-red-600 font-medium bg-slate-200 animate-pulse rounded-full h-5 w-full'></p>
+//                                 <p className='text-slate-500 line-through bg-slate-200 animate-pulse rounded-full h-5 w-full'></p>
+//                             </div>
+//                         </div>
+//                     </div>
+//                 ))
+//             ) : (
+//                 data.map((product, index) => (
+//                     <Link
+//                         key={index}
+//                         to={"/product/" + product?._id}
+//                         className='relative w-full min-w-[150px] md:min-w-[200px] bg-white rounded-sm shadow-sm'
+//                         onClick={scrollTop}
+//                     >
+//                         {/* Wishlist Button Icon on the top-right corner */}
+//                         <button
+//                             className='absolute top-2 right-2 bg-white p-1 rounded-full shadow-md z-10'
+//                             onClick={(e) => handleAddToWishlist(e, product?._id)}
+//                         >
+//                             <FaHeart className='text-red-500 text-lg' />
+//                         </button>
+//                         <div className='h-52 md:h-72 flex justify-center items-center p-1'>
+//                             <img
+//                                 src={product?.productImage[0]}
+//                                 className='object-cover h-full w-full rounded-sm transition-all transform hover:scale-105'
+//                                 alt={product?.productName}
+//                             />
+//                         </div>
+//                         <div className='p-3 sm:p-4 grid gap-1'>
+//                             <div className='flex gap-1 mb-1'>
+//                                 <span className='bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-0.5 rounded'>ONLY ON FASHOMART</span>
+//                             </div>
+//                             <p className='text-sm text-black font-medium m-0 leading-tight'>{product?.brandName}</p>
+//                             <h2 className='text-sm md:text-base text-gray-700 line-clamp-1 m-0 leading-tight'>{product?.productName}</h2>
+//                             <p className='capitalize text-slate-500'>
+//                                 {product?.category}
+//                             </p>
+//                             <div className='flex gap-1 -ml-3 lg:ml-0'>
+//                                 <p className='text-red-600 font-medium'>
+//                                     {displayINRCurrency(product?.sellingPrice)}
+//                                 </p>
+//                                 <p className='text-slate-500 line-through'>
+//                                     {displayINRCurrency(product?.price)}
+//                                 </p>
+//                             </div>
+//                         </div>
+//                     </Link>
+//                 ))
+//             )}
+//         </div>
+//     );
+// };
+
+// export default VerticalCard;
+
+
+
 import React, { useContext } from 'react';
 import scrollTop from '../helpers/scrollTop';
 import displayINRCurrency from '../helpers/displayCurrency';
@@ -218,20 +404,20 @@ const VerticalCard = ({ loading, data = [] }) => {
     };
 
     return (
-        <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 justify-center'>
+        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3 md:gap-4'>
             {loading ? (
                 loadingList.map((_, index) => (
                     <div
                         key={index}
-                        className='w-full min-w-[170px] md:min-w-[200px] bg-white rounded-sm shadow-sm'
+                        className='w-full min-w-[160px] md:min-w-[180px] bg-white rounded-lg shadow-sm'
                     >
-                        <div className='bg-slate-200 h-64 md:h-80 flex justify-center items-center animate-pulse'></div>
-                        <div className='p-4 grid gap-2'>
-                            <h2 className='font-medium text-base md:text-lg bg-slate-200 animate-pulse rounded-full h-6'></h2>
-                            <p className='capitalize bg-slate-200 animate-pulse rounded-full h-4'></p>
-                            <div className='flex gap-3'>
-                                <p className='text-red-600 font-medium bg-slate-200 animate-pulse rounded-full h-5 w-full'></p>
-                                <p className='text-slate-500 line-through bg-slate-200 animate-pulse rounded-full h-5 w-full'></p>
+                        <div className='bg-gray-200 h-48 md:h-64 flex justify-center items-center animate-pulse'></div>
+                        <div className='p-2 sm:p-3 grid gap-2'>
+                            <h2 className='font-medium text-sm md:text-base bg-gray-200 animate-pulse rounded-full h-6'></h2>
+                            <p className='capitalize bg-gray-200 animate-pulse rounded-full h-4'></p>
+                            <div className='flex gap-2'>
+                                <p className='text-red-600 font-medium bg-gray-200 animate-pulse rounded-full h-5 w-full'></p>
+                                <p className='text-gray-500 line-through bg-gray-200 animate-pulse rounded-full h-5 w-full'></p>
                             </div>
                         </div>
                     </div>
@@ -241,37 +427,43 @@ const VerticalCard = ({ loading, data = [] }) => {
                     <Link
                         key={index}
                         to={"/product/" + product?._id}
-                        className='relative w-full min-w-[170px] md:min-w-[200px] bg-white rounded-sm shadow-sm'
+                        className='relative w-full min-w-[160px] md:min-w-[180px] bg-white rounded-lg shadow-sm'
                         onClick={scrollTop}
                     >
                         {/* Wishlist Button Icon on the top-right corner */}
                         <button
-                            className='absolute top-3 right-3 bg-white p-1 rounded-full shadow-md z-10'
+                            className='absolute top-2 right-2 bg-white p-1 rounded-full shadow-md z-10'
                             onClick={(e) => handleAddToWishlist(e, product?._id)}
                         >
                             <FaHeart className='text-red-500 text-lg' />
                         </button>
-                        <div className='h-60 md:h-72 p-0 flex justify-center items-center'>
+                        <div className='h-53 md:h-68 flex justify-center items-center p-1'>
                             <img
                                 src={product?.productImage[0]}
-                                className='object-cover h-full w-full rounded-sm transition-all transform hover:scale-105'
+                                className='object-cover h-full w-full rounded-md transition-transform duration-200 transform hover:scale-105'
                                 alt={product?.productName}
                             />
                         </div>
-                        <div className='p-4 grid gap-0'>
+                        <div className='p-2 sm:p-3 grid gap-1'>
                             <div className='flex gap-1 mb-1'>
-                                <span className='bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-0.5 rounded'>ONLY ON FASHOMART</span>
+                                <span className='bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-0.5 rounded'>
+                                    ONLY ON FASHOMART
+                                </span>
                             </div>
-                            <p className='text-sm text-black font-medium m-0 leading-tight'>{product?.brandName}</p>
-                            <h2 className='text-sm md:text-base text-gray-700 line-clamp-1 m-0 leading-tight'>{product?.productName}</h2>
-                            <p className='capitalize text-slate-500'>
+                            <p className='text-xs md:text-sm text-black font-medium leading-tight'>
+                                {product?.brandName}
+                            </p>
+                            <h2 className='text-xs md:text-sm text-gray-700 line-clamp-1 leading-tight'>
+                                {product?.productName}
+                            </h2>
+                            <p className='capitalize text-gray-500 text-xs'>
                                 {product?.category}
                             </p>
-                            <div className='flex gap-1 -ml-3 lg:ml-0'>
-                                <p className='text-red-600 font-medium'>
+                            <div className='flex gap-1'>
+                                <p className='text-red-600 font-medium text-sm'>
                                     {displayINRCurrency(product?.sellingPrice)}
                                 </p>
-                                <p className='text-slate-500 line-through'>
+                                <p className='text-gray-500 line-through text-xs'>
                                     {displayINRCurrency(product?.price)}
                                 </p>
                             </div>
@@ -280,7 +472,12 @@ const VerticalCard = ({ loading, data = [] }) => {
                 ))
             )}
         </div>
+
+       
     );
 };
 
 export default VerticalCard;
+
+
+

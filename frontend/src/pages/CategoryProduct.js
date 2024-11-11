@@ -493,7 +493,7 @@ const CategoryProduct = () => {
       {/* Mobile and Desktop version */}
       <div className='grid grid-cols-1 lg:grid-cols-[200px,1fr] gap-4'>
         {/* Left side (Filters) */}
-        <div className='bg-white p-2 lg:min-h-[calc(100vh-120px)] overflow-y-scroll'>
+        <div className='bg-white p-1 lg:min-h-[calc(100vh-120px)] overflow-y-scroll'>
           {/* Sort by */}
           <div className=''>
             <h3 className='text-base uppercase font-medium text-slate-500 border-b pb-1 border-slate-300'>
@@ -547,7 +547,20 @@ const CategoryProduct = () => {
         </div>
 
         {/* Right side (Product display) */}
-        <div className='px-4'>
+        {/* <div className='px-0'>
+          <p className='font-medium text-slate-800 text-lg my-2'>
+            Search Results: {data.length}
+          </p>
+          <div className='min-h-[calc(100vh-120px)] overflow-y-scroll max-h-[calc(100vh-120px)] '>
+            {data.length !== 0 && !loading ? (
+              <VerticalCard data={data} loading={loading} />
+            ) : (
+              <p>No products found.</p>
+            )}
+          </div>
+        </div> */}
+
+        <div className='px-2 sm:px-2 md:px-4 lg:px-4'>
           <p className='font-medium text-slate-800 text-lg my-2'>
             Search Results: {data.length}
           </p>
@@ -559,9 +572,14 @@ const CategoryProduct = () => {
             )}
           </div>
         </div>
+
+
+
       </div>
     </div>
   );
 };
 
 export default CategoryProduct;
+
+
