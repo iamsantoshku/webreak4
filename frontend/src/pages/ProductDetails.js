@@ -351,11 +351,33 @@ const ProductDetails = () => {
     fetchUserAddToCart();
   };
 
+  // const handleAddToCart = async (e, id) => {
+  //   if (!selectedSize || !selectedColor) {
+  //     toast.error("Please select size and color before adding to cart.");
+  //     return;
+  //   }
+  
+  //   await addToCart(e, id, selectedSize, selectedColor);
+  //   fetchUserAddToCart();
+  // };
+
   const handleBuyProduct = async (e, id) => {
     await addToCart(e, id);
     fetchUserAddToCart();
     navigate("/cart");
   };
+
+
+  // const handleBuyProduct = async (e, id) => {
+  //   if (!selectedSize || !selectedColor) {
+  //     toast.error("Please select size and color before buying.");
+  //     return;
+  //   }
+  
+  //   await addToCart(e, id, selectedSize, selectedColor);
+  //   fetchUserAddToCart();
+  //   navigate("/cart");
+  // };
 
   return (
     <div className='container mx-auto p-4 md:px-8 lg:px-16'>
@@ -470,6 +492,9 @@ const ProductDetails = () => {
                   Add To Cart
                 </button>
               </div>
+
+              <div>              <p className='text-slate-600 font-medium my-1'>Description: </p>
+              <p>{data?.description}</p>           </div>
             </>
           )}
         </div>

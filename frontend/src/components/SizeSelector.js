@@ -1,8 +1,5 @@
 
 
-
-
-
 import React from 'react';
 
 const SizeSelector = ({ availableSizes, selectedSize, setSelectedSize }) => {

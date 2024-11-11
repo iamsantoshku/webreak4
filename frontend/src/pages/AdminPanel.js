@@ -286,7 +286,7 @@ import { Layout, Menu } from 'antd';
 import { ShopOutlined, OrderedListOutlined, UserOutlined, DashboardOutlined, FileDoneOutlined } from '@ant-design/icons';
 import UploadProduct from '../components/UploadProduct';
 import SummaryApi from '../common';
-import companylogo from '../assest/download.jpeg';
+import companylogo from '../assest/fashomart logo 01.png';
 import { useParams } from 'react-router-dom';
 
 const { Sider, Content } = Layout;
@@ -320,11 +320,12 @@ const AdminPanel = () => {
         {/* Sidebar for larger screens */}
         <Sider collapsible className='bg-red md:block hidden' width={220}>
           <div className='h-32 flex justify-center items-center flex-col p-4'>
-            <div className='w-20 h-20 flex justify-center items-center mb-2'>
+            
+            <NavLink to='/'>
+              {/* <p className='color rounded-lg bg-white capitalize text-lg font-semibold'>fashomart</p> */}
+              <div className='w-21 h-21 flex justify-center items-center mb-2'>
               <img src={companylogo} alt="Company Logo" className='w-full h-full object-cover rounded-full' />
             </div>
-            <NavLink to='/'>
-              <p className='color rounded-lg bg-white capitalize text-lg font-semibold'>Company Name</p>
             </NavLink>
           </div>
 

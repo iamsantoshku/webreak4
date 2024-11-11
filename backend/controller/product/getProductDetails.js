@@ -3,10 +3,7 @@ const productModel = require("../../models/productModel")
 const getProductDetails = async(req,res)=>{
     try{
         // productId ,
-        const { productId , productName } = req.body
-
-        // by product name
-        // const {  productName } = req.body
+        const { productId , productName } = req.body       
 
         const product = await productModel.findById( productId)
         // const product = await productModel.findOne({ productName });

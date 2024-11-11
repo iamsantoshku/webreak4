@@ -59,7 +59,7 @@ const HorizontalCardProduct = ({ category, heading }) => {
     };
 
     return (
-        <div className='container mx-auto px-4 my-6 relative'>
+        <div className='container mx-auto px-4 my-6 relative lg:ml-5'>
             <h2 className='text-2xl font-semibold py-4'>{heading}</h2>
 
             <div className='flex items-center gap-4 md:gap-6 overflow-scroll scrollbar-none transition-all' ref={scrollElement}>
