@@ -369,7 +369,7 @@ const Header = () => {
           {/* user  */}
 
           {/** Wishlist Icon */}
-          <Link to={"/wishlist"} className='text-xl relative border border-black rounded-full p-1 text-black bg-white'>
+          <Link to={"/wishlist"} className='text-xl relative border border-red-600 rounded-full p-1 text-red-600 bg-white'>
             <span className="text-lg"> {/* Adjust icon size for mobile */}
               <FaHeart />
             </span>
@@ -377,8 +377,8 @@ const Header = () => {
               <span className='absolute top-0 right-0 w-2 h-2 bg-red-600 rounded-full'></span>
             )}
           </Link>
-
-          {user?._id && (
+          {/* user?._id && */}
+          { (
             <Link to={"/cart"} className='text-xl relative'>
               <span className="text-lg"><FaShoppingCart /></span> {/* Adjust icon size for mobile */}
               <div className='bg-red-600 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center absolute -top-2 -right-3'>
@@ -430,7 +430,7 @@ const Header = () => {
 
           <div>
             {!user?._id && (
-              <Link to={"/login"} className='px-3 py-1 rounded-full text-white bg-red-600 hover:bg-red-700'>Login</Link>
+              <Link to={"/login"} className='px-7 -ml-4 py-1 rounded-full text-white bg-red-600 hover:bg-red-700'>Login</Link>
             )}
           </div>
         </div>

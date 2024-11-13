@@ -155,12 +155,12 @@ import appstore from "../assest/appstore.png";
 
 const Footer = () => {
   return (
-    <footer className="font-sans bg-pink-100 text-black mt-12">
-      <div className="container mx-auto px-4 py-8">
+    <footer className="font-sans bg-pink-100 text-black -mt-[2.3vw]">
+      <div className="container mx-auto px-0 py-8">
         {/* App Download Section */}
-        <div className="bg-gray-700 flex flex-col sm:flex-row justify-between items-center py-6 text-white">
+        <div className="bg-gray-700 flex flex-col sm:flex-row w-full justify-between items-center py-6 text-white">
           <div className="flex flex-col items-center sm:items-start gap-2 sm:gap-4 ml-[5vw]">
-            <h3 className="text-lg font-semibold">Download Our App</h3>
+            <h3 className="text-lg font-semibold mr-4 sm:mr-4 lg:ml-20">Download Our App</h3>
             <div className="flex gap-4">
               <NavLink to='https://play.google.com/store/games?hl=en'>
                 <button className="bg-black text-white px-4 py-1 rounded flex items-center">
@@ -168,7 +168,7 @@ const Footer = () => {
                 </button>
               </NavLink>
               <NavLink to='https://www.apple.com/app-store/'>
-                <button className="bg-black text-white px-3 py-1 rounded flex items-center">
+                <button className="bg-black text-white px-3 py-1 rounded flex items-center mr-5 sm:mr-5">
                   <img src={appstore} className="w-19 h-10" alt="App Store" />
                 </button>
               </NavLink>
@@ -176,8 +176,8 @@ const Footer = () => {
           </div>
 
           <div className="text-right mr-[5vw] mt-4 sm:mt-0">
-            <p className="text-sm">FOR ANY HELP, YOU MAY CALL US AT <strong>1800-266-3333</strong></p>
-            <p className="text-xs">(Monday to Saturday: 10 am - 10 pm, Sunday: 10 am - 7 pm)</p>
+            <p className=" text-xs sm:text-sm">FOR ANY HELP, YOU MAY CALL US AT <strong>1800-266-3333</strong></p>
+            <p className="text-xs ml-2">(Monday to Saturday:10am-10pm, Sunday:10am-7pm)</p>
           </div>
         </div>
 

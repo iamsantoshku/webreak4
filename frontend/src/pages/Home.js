@@ -17,14 +17,14 @@ const Home = () => {
       {/* <HorizontalCardProduct category={"woman"} heading={"Top's Woman Fasion"}/> */}
       <HorizontalCardProduct category={"footwear"} heading={"Top's Footwear"}/>
       <Banner3/>
-      <HorizontalCardProduct category={"watches"} heading={"Popular's Watches"}/>
+      {/* <HorizontalCardProduct category={"watches"} heading={"Popular's Watches"}/> */}
 
       <VerticalCardProduct category={"westernwear"} heading={"WesternWear"}/>
       <VerticalCardProduct category={"sportswear"} heading={"Sportswear"}/>
       <Img3banner/>
-      <VerticalCardProduct category={"home"} heading={"Home"}/>
+      <VerticalCardProduct category={"home"} heading={"Furniture"}/>
       <VerticalCardProduct category={"jewellery"} heading={"Jewellery"}/>
-      <VerticalCardProduct category={"earphones"} heading={"Wired Earphones"}/>
+      {/* <VerticalCardProduct category={"earphones"} heading={"Wired Earphones"}/> */}
       {/* <VerticalCardProduct category={"speakers"} heading={"Bluetooth Speakers"}/> */}
       <BannerProduct1/>
       {/* <VerticalCardProduct category={"refrigerator"} heading={"Refrigerator"}/> */}
