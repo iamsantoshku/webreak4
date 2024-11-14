@@ -41,7 +41,7 @@ import { NavLink } from 'react-router-dom';
 
 const Background = () => {
   return (
-    <div className="mt-[0vw] flex justify-center w-screen overflow-hidden">
+    <div className="flex justify-center w-screen overflow-hidden">
       <NavLink to="#">
         <img
           src={backimg}
@@ -54,3 +54,7 @@ const Background = () => {
 };
 
 export default Background;
+
+
+
+

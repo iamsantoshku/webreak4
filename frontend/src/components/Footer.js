@@ -155,7 +155,7 @@ import appstore from "../assest/appstore.png";
 
 const Footer = () => {
   return (
-    <footer className="font-sans bg-pink-100 text-black -mt-[2.3vw]">
+    <footer className="font-sans bg-pink-100 text-black -mt-[2.3vw] ">
       <div className="container mx-auto px-0 py-8">
         {/* App Download Section */}
         <div className="bg-gray-700 flex flex-col sm:flex-row w-full justify-between items-center py-6 text-white">
