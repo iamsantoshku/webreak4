@@ -282,7 +282,7 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div className="text-center rounded-2xl bg-black text-sm text-white py-4">
-          <p>&copy; 2024 WebReak Fashion. All rights reserved.</p>
+          <p>&copy; 2024 fashomart. All rights reserved.</p>
         </div>
       </div>
     </footer>

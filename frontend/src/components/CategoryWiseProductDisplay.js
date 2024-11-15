@@ -220,7 +220,7 @@ const CategroyWiseProductDisplay = ({ category, heading }) => {
                     data.map((product) => (
                         <Link key={product?._id} to={"/product/" + product?._id} className='w-full bg-white rounded-sm shadow' onClick={scrollTop}>
                             <div className='bg-slate-200 h-80 flex justify-center items-center'>
-                                <img src={product.productImage[0]} className='object-cover h-full w-full hover:scale-110 transition-all mix-blend-multiply' />
+                                <img src={product.productImage[0]} className='object-cover h-full w-full mix-blend-multiply' />
                             </div>
                             <div className='p-4 grid gap-1'>
                                 <h2 className='font-medium text-base text-ellipsis line-clamp-1 text-black'>{product?.productName}</h2>
