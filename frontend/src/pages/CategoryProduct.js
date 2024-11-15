@@ -560,7 +560,7 @@ const CategoryProduct = () => {
           </div>
         </div> */}
 
-        <div className='px-2 sm:px-2 md:px-4 lg:px-4'>
+        <div className='px-0 sm:px-2 md:px-2 lg:px-2'>
           <p className='font-medium text-slate-800 text-lg my-2'>
             Search Results: {data.length}
           </p>
