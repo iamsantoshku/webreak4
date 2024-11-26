@@ -137,6 +137,39 @@
 
 
 
+// const mongoose = require('mongoose');
+// const { v4: uuidv4 } = require('uuid'); // Import uuid to generate unique IDs
+
+// const OrderSchema = new mongoose.Schema({
+//     orderId: { type: String, unique: true, default: uuidv4 }, // Add unique orderId
+//     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+//     products: [
+//         {
+//             productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
+//             productName: { type: String }, // Add product name
+//             productImage: { type: [String] }, // Add product image
+//             quantity: { type: Number, required: true },
+            
+            
+//         }, 
+//     ],
+//     totalAmount: { type: Number, required: true },
+//     shippingAddress: {
+//         name: String,
+//         addressLine1: String,
+//         addressLine2: String,
+//         city: String,
+//         state: String,
+//         postalCode: String,
+//         country: String,
+//     },
+//     status: { type: String, default: 'Pending' },
+//     createdAt: { type: Date, default: Date.now },
+// });
+
+
+// new 
+
 const mongoose = require('mongoose');
 const { v4: uuidv4 } = require('uuid'); // Import uuid to generate unique IDs
 
@@ -148,8 +181,9 @@ const OrderSchema = new mongoose.Schema({
             productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
             productName: { type: String }, // Add product name
             productImage: { type: [String] }, // Add product image
+            size: { type: String }, // Add size field here
             quantity: { type: Number, required: true },
-        }, 
+        },
     ],
     totalAmount: { type: Number, required: true },
     shippingAddress: {
@@ -166,6 +200,9 @@ const OrderSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Order', OrderSchema);
+
+
+// module.exports = mongoose.model('Order', OrderSchema);
 
 
 

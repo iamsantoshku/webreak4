@@ -348,7 +348,7 @@ const AdminPanel = () => {
 
             <SubMenu key="category" icon={<FileDoneOutlined />} title="Category">
               <Menu.Item key="8"><NavLink to="/admin-panel/product-list">Category List</NavLink></Menu.Item>
-              <Menu.Item key="9"><NavLink to="/products">New Category</NavLink></Menu.Item>
+              <Menu.Item key="9"><NavLink to="/admin-panel/newcat">New Category</NavLink></Menu.Item>
             </SubMenu>
 
             <SubMenu key="sub3" icon={<UserOutlined />} title="Users">
@@ -387,7 +387,7 @@ const AdminPanel = () => {
 
             <SubMenu key="category" icon={<FileDoneOutlined />} title="Category">
               <Menu.Item key="8"><NavLink to="/admin-panel/product-list">Category List</NavLink></Menu.Item>
-              <Menu.Item key="9"><NavLink to="/products">New Category</NavLink></Menu.Item>
+              <Menu.Item key="9"><NavLink to="/admin-panel/newcat">New Category</NavLink></Menu.Item>
             </SubMenu>
 
             <SubMenu key="sub3" icon={<UserOutlined />} title="Users">

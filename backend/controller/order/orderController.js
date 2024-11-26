@@ -447,7 +447,10 @@ const orderController = async (req, res) => {
                 quantity: item.quantity,
                 productName: item.productId.productName,
                 // productimage: item.image, // Assuming `images` is an array
-                productImage:item.productId.productImage
+                productImage:item.productId.productImage,
+                size:item.size
+                
+
                 // productId
             })),
             totalAmount,

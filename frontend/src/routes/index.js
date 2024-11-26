@@ -26,6 +26,7 @@ import UserDashboard from '../pages/UserDashboard'
 import Profile from '../components/userdasboard/Profile'
 import OrderListPage from '../pages/OrderListPage'
 import Orderdetailsadmin from '../pages/Orderdetailsadmin'
+import AdminCategoryPage from '../pages/AdminCategoryPage'
 // import OrderWrapper from '../components/OrderWrapper'
 
 
@@ -102,8 +103,7 @@ const router = createBrowserRouter([
                 element:<Order/>
 
             },
-            
-            
+                       
                       
             {
                 path : "admin-panel",
@@ -142,6 +142,10 @@ const router = createBrowserRouter([
                         path : "order-detail",
                         element:<Orderdetailsadmin/>
 
+                    },
+                    {
+                        path : "newcat",
+                        element : <AdminCategoryPage/>
                     }
                                                           
                 ]

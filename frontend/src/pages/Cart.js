@@ -397,7 +397,7 @@ const Cart = () => {
                 )}
             </div>
 
-            <div className='flex flex-col lg:flex-row gap-10 lg:justify-between p-4'>
+            <div className='flex flex-col lg:flex-row gap-10 lg:justify-between p-5'>
                 {/* View Product */}
                 <div className='w-full max-w-3xl'>
                     {loading ? (
@@ -410,12 +410,14 @@ const Cart = () => {
                                 <div className='w-32 h-32 bg-slate-200'>
                                     <img src={product?.productId?.productImage[0]} className='w-full h-full object-scale-down mix-blend-multiply' alt='Product' />
                                 </div>
-                                <div className='px-4 py-2 relative'>
+                                <div className='px-4 py-1 relative -mt-3'>
                                     <div className='absolute right-0 text-red-600 rounded-full p-2 hover:bg-red-600 hover:text-white cursor-pointer' onClick={() => deleteCartProduct(product?._id)}>
                                         <MdDelete />
                                     </div>
 
                                     <h2 className='text-lg lg:text-xl text-ellipsis line-clamp-1'>{product?.productId?.productName}</h2>
+                                    <p>Size: {product?.size || "N/A"}</p>
+
                                     {/* <p>Size: {product?.productId?.size}</p>
                                     <p>Color: {product?.productId?.color}</p> */}
                                     <p className='capitalize text-slate-500'>{product?.productId.category}</p>

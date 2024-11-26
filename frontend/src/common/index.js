@@ -120,7 +120,15 @@ const SummaryApi = {
     updateOrderStatus:{
         url : `${backendDomin}/api/update-status`,
         method : 'put'
-    }
+    },
+    addcategory : {
+        url : `${backendDomin}/api/create`,
+        method : 'post'
+    },
+    allcategory : {
+        url : `${backendDomin}/api/allcateg`,
+        method : 'get'
+    },
     
     
     

@@ -346,10 +346,10 @@ const ProductDetails = () => {
     setZoomImage(false);
   };
 
-  const handleAddToCart = async (e, id) => {
-    await addToCart(e, id);
-    fetchUserAddToCart();
-  };
+  // const handleAddToCart = async (e, id) => {
+  //   await addToCart(e, id);
+  //   fetchUserAddToCart();
+  // };
 
   // const handleAddToCart = async (e, id) => {
   //   if (!selectedSize || !selectedColor) {
@@ -360,6 +360,21 @@ const ProductDetails = () => {
   //   await addToCart(e, id, selectedSize, selectedColor);
   //   fetchUserAddToCart();
   // };
+
+  const handleAddToCart = async (e, id) => {
+    if (!selectedSize) {
+        toast.error("Please select a size before adding to cart.");
+        return;
+    }
+
+    await addToCart(e, id, selectedSize); // Pass selectedSize to the addToCart helper
+    fetchUserAddToCart();
+};
+
+
+
+
+
 
   const handleBuyProduct = async (e, id) => {
     await addToCart(e, id);

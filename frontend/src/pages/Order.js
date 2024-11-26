@@ -96,6 +96,7 @@ const Order = () => {
                                             <div className="flex-1">
                                                 <p className="text-gray-800 font-semibold">{product.productName}</p>
                                                 <p className="text-gray-600">Quantity: {product.quantity}</p>
+                                                <p className="text-gray-600">Size:{product.size}</p>
                                             </div>
                                         </div>
                                     ))}
