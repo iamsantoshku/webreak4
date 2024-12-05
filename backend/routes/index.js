@@ -30,6 +30,7 @@ const addToWishlistController = require('../controller/user/addToWishlistControl
 const addToWishlistViewProduct = require('../controller/user/addToWishlistViewProduct');
 // const removeFromWishlist = require('../controller/user/removeFromWishlist');
 // const removeFromWishlist = require('../controller/user/removeFromWishlist')
+const {cancelOrder} = require('../controller/order/cancelOrder')
 const deleteToWishlistProduct = require('../controller/user/deleteToWishlistProduct')
 const {
     createCategory,
@@ -101,7 +102,8 @@ router.post('/create-order', orderController);
 router.get('/orders', getAllOrders);
 router.get('/ordersdet-admin',authToken, getOrderDetails);
 
-router.get('/orders-det',authToken, getUserOrders); 
+router.get('/orders-det',authToken, getUserOrders);
+router.patch('/orders/cancel/:orderId', cancelOrder);  
 // router.put('/update-status/:orderId', updateOrderStatus);
 
 router.put('/update-status/:orderId', async (req, res) => {

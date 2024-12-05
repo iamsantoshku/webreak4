@@ -410,154 +410,381 @@
 
 
 
-import React, { useEffect, useState } from 'react';
-import SummaryApi from '../common';
+// import React, { useEffect, useState } from 'react';
+// import SummaryApi from '../common';
+
+// const Orderdetailsadmin = () => {
+//     const [data, setData] = useState([]);
+//     const [error, setError] = useState(null);
+
+//     // Fetch user orders
+//     const fetchUserOrders = async () => {
+//         try {
+//             const response = await fetch(SummaryApi.orderdetadmin.url, {
+//                 method: SummaryApi.orderdetadmin.method,
+//                 credentials: 'include',
+//             });
+//             const responseData = await response.json();
+//             if (responseData.success) {
+//                 setData(responseData.data);
+//             } else {
+//                 console.error('Failed to fetch orders:', responseData.msg);
+//                 setError('Failed to fetch orders.');
+//             }
+//         } catch (error) {
+//             console.error('Error fetching orders:', error);
+//             setError('Failed to load orders.');
+//         }
+//     };
+
+//     // Update order status
+//     const updateOrderStatus = async (orderId, newStatus) => {
+//         try {
+//             const response = await fetch(`${SummaryApi.updateOrderStatus.url}/${orderId}`, {
+//                 method: 'PUT',
+//                 headers: {
+//                     'Content-Type': 'application/json',
+//                 },
+//                 body: JSON.stringify({ status: newStatus }),
+//             });
+
+//             const responseData = await response.json();
+
+//             if (responseData.success) {
+//                 setData((prevData) =>
+//                     prevData.map((order) =>
+//                         order.orderId === orderId ? { ...order, status: newStatus } : order
+//                     )
+//                 );
+//             } else {
+//                 console.error('Failed to update order status:', responseData.msg);
+//             }
+//         } catch (error) {
+//             console.error('Error updating order status:', error);
+//         }
+//     };
+
+//     useEffect(() => {
+//         fetchUserOrders();
+//     }, []);
+
+//     return (
+//         <div className="bg-gray-100 min-h-screen p-4 sm:p-6 lg:p-8">
+//             <h1 className="text-2xl sm:text-3xl font-semibold mb-4 sm:mb-6 text-gray-800">All Orders</h1>
+//             {error && <p className="text-red-500">{error}</p>}
+//             {!data.length ? (
+//                 <p className="text-center text-gray-500">No orders available</p>
+//             ) : (
+//                 <div className="space-y-6">
+//                     {data.map((order, index) => (
+//                         <div
+//                             key={`${order.orderId}-${index}`}
+//                             className="bg-white shadow-md rounded-lg p-4 sm:p-6 border border-gray-200"
+//                         >
+//                             <div className="flex justify-between items-center mb-4">
+//                                 <h2 className="text-lg font-semibold text-gray-700">
+//                                     Order ID: {order.orderId}
+//                                 </h2>
+//                                 <p className="text-sm text-gray-500">
+//                                     Order Date: {new Date(order.createdAt).toLocaleDateString()}
+//                                 </p>
+//                             </div>
+//                             <p className="text-green-600 font-medium mb-2">Status: {order.status}</p>
+//                             <p className="text-gray-700 font-semibold mb-6">
+//                                 Total Amount: ${order.totalAmount}
+//                             </p>
+
+//                             <div className="flex space-x-4 mb-6">
+//                                 {order.status !== 'Shipped' && (
+//                                     <button
+//                                         onClick={() => updateOrderStatus(order.orderId, 'Shipped')}
+//                                         className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+//                                     >
+//                                         Mark as Shipped
+//                                     </button>
+//                                 )}
+//                                 {order.status === 'Shipped' && (
+//                                     <button
+//                                         onClick={() => updateOrderStatus(order.orderId, 'Delivered')}
+//                                         className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+//                                     >
+//                                         Mark as Delivered
+//                                     </button>
+//                                 )}
+
+//                             </div>
+//                             <div className="border-t border-gray-200 pt-4 mb-4">
+//                                 <h3 className="text-lg font-semibold text-gray-700 mb-2">Shipping Address:</h3>
+//                                 <p className="text-gray-600">Name: {order.shippingAddress?.name}</p>
+//                                 <p className="text-gray-600">Address Line 1: {order.shippingAddress?.addressLine1}</p>
+//                                 <p className="text-gray-600">Address Line 2: {order.shippingAddress?.addressLine2}</p>
+//                                 <p className="text-gray-600">City: {order.shippingAddress?.city}</p>
+//                                 <p className="text-gray-600">State: {order.shippingAddress?.state}</p>
+//                                 <p className="text-gray-600">Postal Code: {order.shippingAddress?.postalCode}</p>
+//                                 <p className="text-gray-600">Country: {order.shippingAddress?.country}</p>
+//                             </div>
+
+//                             <div className="border-t border-gray-200 pt-4">
+//                                 <h3 className="text-lg font-semibold text-gray-700 mb-4">Products:</h3>
+//                                 <div className="space-y-4">
+//                                     {order.products.map((product, productIndex) => (
+//                                         <div 
+//                                             key={product.productId + '-' + productIndex} 
+//                                             className="flex flex-col sm:flex-row items-start sm:items-center border-b border-gray-200 pb-4"
+//                                         >
+//                                             <div className="w-24 h-24 sm:w-28 sm:h-28 overflow-hidden rounded-lg mr-0 sm:mr-4 mb-4 sm:mb-0">
+//                                                 {product.productImage?.map((image, imgIndex) => (
+//                                                     <img
+//                                                         key={imgIndex}
+//                                                         src={image}
+//                                                         alt={`Product ${product.productName} - ${imgIndex + 1}`}
+//                                                         className="w-full h-full object-cover"
+//                                                     />
+//                                                 ))}
+//                                             </div>
+//                                             <div className="flex-1">
+//                                                 <p className="text-gray-800 font-semibold">{product.productName}</p>
+//                                                 <p className="text-gray-600">Quantity: {product.quantity}</p>
+//                                                 <p className="text-gray-600">Size:{product.size}</p>
+//                                             </div>
+//                                         </div>
+//                                     ))}
+//                                 </div>
+//                             </div>
+
+//                         </div>
+//                     ))}
+//                 </div>
+//             )}
+//         </div>
+//     );
+// };
+
+// export default Orderdetailsadmin;
+
+
+
+
+
+import React, { useEffect, useState } from "react";
+import SummaryApi from "../common";
 
 const Orderdetailsadmin = () => {
-    const [data, setData] = useState([]);
-    const [error, setError] = useState(null);
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
+  const [isCanceling, setIsCanceling] = useState(false);
 
-    // Fetch user orders
-    const fetchUserOrders = async () => {
-        try {
-            const response = await fetch(SummaryApi.orderdetadmin.url, {
-                method: SummaryApi.orderdetadmin.method,
-                credentials: 'include',
-            });
-            const responseData = await response.json();
-            if (responseData.success) {
-                setData(responseData.data);
-            } else {
-                console.error('Failed to fetch orders:', responseData.msg);
-                setError('Failed to fetch orders.');
-            }
-        } catch (error) {
-            console.error('Error fetching orders:', error);
-            setError('Failed to load orders.');
+  // Fetch all orders for admin
+  const fetchOrdersAdmin = async () => {
+    try {
+      const response = await fetch(SummaryApi.orderdetadmin.url, {
+        method: SummaryApi.orderdetadmin.method,
+        credentials: "include",
+      });
+      const responseData = await response.json();
+      if (responseData.success) {
+        setData(responseData.data);
+      } else {
+        console.error("Failed to fetch orders:", responseData.msg);
+        setError("Failed to fetch orders.");
+      }
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+      setError("Failed to load orders.");
+    }
+  };
+
+  // Cancel an order
+  const cancelOrder = async (orderId) => {
+    setIsCanceling(true);
+    try {
+      const response = await fetch(`${SummaryApi.cancelOrder.url}/${orderId}`, {
+        method: "PATCH",
+        credentials: "include",
+      });
+      const responseData = await response.json();
+      if (responseData.success) {
+        // Update the specific order's status to "Cancelled" in state
+        setData((prevData) =>
+          prevData.map((order) =>
+            order.orderId === orderId
+              ? { ...order, status: "Cancelled" }
+              : order
+          )
+        );
+      } else {
+        console.error("Failed to cancel order:", responseData.msg);
+      }
+    } catch (error) {
+      console.error("Error canceling order:", error);
+    } finally {
+      setIsCanceling(false);
+    }
+  };
+
+  // Update order status
+  const updateOrderStatus = async (orderId, newStatus) => {
+    try {
+      const response = await fetch(
+        `${SummaryApi.updateOrderStatus.url}/${orderId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ status: newStatus }),
         }
-    };
+      );
+      const responseData = await response.json();
 
-    // Update order status
-    const updateOrderStatus = async (orderId, newStatus) => {
-        try {
-            const response = await fetch(`${SummaryApi.updateOrderStatus.url}/${orderId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ status: newStatus }),
-            });
+      if (responseData.success) {
+        // Update the specific order's status in state
+        setData((prevData) =>
+          prevData.map((order) =>
+            order.orderId === orderId ? { ...order, status: newStatus } : order
+          )
+        );
+      } else {
+        console.error("Failed to update order status:", responseData.msg);
+      }
+    } catch (error) {
+      console.error("Error updating order status:", error);
+    }
+  };
 
-            const responseData = await response.json();
+  useEffect(() => {
+    fetchOrdersAdmin();
+  }, []);
 
-            if (responseData.success) {
-                setData((prevData) =>
-                    prevData.map((order) =>
-                        order.orderId === orderId ? { ...order, status: newStatus } : order
-                    )
-                );
-            } else {
-                console.error('Failed to update order status:', responseData.msg);
-            }
-        } catch (error) {
-            console.error('Error updating order status:', error);
-        }
-    };
+  return (
+    <div className="bg-gray-100 min-h-screen p-4 sm:p-6 lg:p-8">
+      <h1 className="text-2xl sm:text-3xl font-semibold mb-4 sm:mb-6 text-gray-800">
+        All Orders
+      </h1>
+      {error && <p className="text-red-500">{error}</p>}
+      {!data.length ? (
+        <p className="text-center text-gray-500">No orders available</p>
+      ) : (
+        <div className="space-y-6">
+          {data.map((order, index) => (
+            <div
+              key={`${order.orderId}-${index}`}
+              className="bg-white shadow-md rounded-lg p-4 sm:p-6 border border-gray-200"
+            >
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-lg font-semibold text-gray-700">
+                  Order ID: {order.orderId}
+                </h2>
+                <p className="text-sm text-gray-500">
+                  Order Date: {new Date(order.createdAt).toLocaleDateString()}
+                </p>
+              </div>
+              <p
+                className={`font-medium mb-2 ${
+                  order.status === "Cancelled"
+                    ? "text-red-600"
+                    : "text-green-600"
+                }`}
+              >
+                Status: {order.status}
+              </p>
+              <p className="text-gray-700 font-semibold mb-6">
+                Total Amount: ${order.totalAmount}
+              </p>
 
-    useEffect(() => {
-        fetchUserOrders();
-    }, []);
+              <div className="flex space-x-4 mb-6">
+                {order.status !== "Shipped" && order.status !== "Cancelled" && (
+                  <button
+                    onClick={() => updateOrderStatus(order.orderId, "Shipped")}
+                    className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  >
+                    Mark as Shipped
+                  </button>
+                )}
+                {order.status === "Shipped" && (
+                  <button
+                    onClick={() => updateOrderStatus(order.orderId, "Delivered")}
+                    className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+                  >
+                    Mark as Delivered
+                  </button>
+                )}
+                {order.status !== "Cancelled" && (
+                  <button
+                    onClick={() => cancelOrder(order.orderId)}
+                    className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                    disabled={isCanceling}
+                  >
+                    {isCanceling ? "Cancelling..." : "Cancel Order"}
+                  </button>
+                )}
+              </div>
+              <div className="border-t border-gray-200 pt-4 mb-4">
+                <h3 className="text-lg font-semibold text-gray-700 mb-2">
+                  Shipping Address:
+                </h3>
+                <p className="text-gray-600">Name: {order.shippingAddress?.name}</p>
+                <p className="text-gray-600">
+                  Address Line 1: {order.shippingAddress?.addressLine1}
+                </p>
+                <p className="text-gray-600">
+                  Address Line 2: {order.shippingAddress?.addressLine2}
+                </p>
+                <p className="text-gray-600">City: {order.shippingAddress?.city}</p>
+                <p className="text-gray-600">State: {order.shippingAddress?.state}</p>
+                <p className="text-gray-600">
+                  Postal Code: {order.shippingAddress?.postalCode}
+                </p>
+                <p className="text-gray-600">
+                  Country: {order.shippingAddress?.country}
+                </p>
+              </div>
 
-    return (
-        <div className="bg-gray-100 min-h-screen p-4 sm:p-6 lg:p-8">
-            <h1 className="text-2xl sm:text-3xl font-semibold mb-4 sm:mb-6 text-gray-800">All Orders</h1>
-            {error && <p className="text-red-500">{error}</p>}
-            {!data.length ? (
-                <p className="text-center text-gray-500">No orders available</p>
-            ) : (
-                <div className="space-y-6">
-                    {data.map((order, index) => (
-                        <div
-                            key={`${order.orderId}-${index}`}
-                            className="bg-white shadow-md rounded-lg p-4 sm:p-6 border border-gray-200"
-                        >
-                            <div className="flex justify-between items-center mb-4">
-                                <h2 className="text-lg font-semibold text-gray-700">
-                                    Order ID: {order.orderId}
-                                </h2>
-                                <p className="text-sm text-gray-500">
-                                    Order Date: {new Date(order.createdAt).toLocaleDateString()}
-                                </p>
-                            </div>
-                            <p className="text-green-600 font-medium mb-2">Status: {order.status}</p>
-                            <p className="text-gray-700 font-semibold mb-6">
-                                Total Amount: ${order.totalAmount}
-                            </p>
-
-                            <div className="flex space-x-4 mb-6">
-                                {order.status !== 'Shipped' && (
-                                    <button
-                                        onClick={() => updateOrderStatus(order.orderId, 'Shipped')}
-                                        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                                    >
-                                        Mark as Shipped
-                                    </button>
-                                )}
-                                {order.status === 'Shipped' && (
-                                    <button
-                                        onClick={() => updateOrderStatus(order.orderId, 'Delivered')}
-                                        className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-                                    >
-                                        Mark as Delivered
-                                    </button>
-                                )}
-
-                            </div>
-                            <div className="border-t border-gray-200 pt-4 mb-4">
-                                <h3 className="text-lg font-semibold text-gray-700 mb-2">Shipping Address:</h3>
-                                <p className="text-gray-600">Name: {order.shippingAddress?.name}</p>
-                                <p className="text-gray-600">Address Line 1: {order.shippingAddress?.addressLine1}</p>
-                                <p className="text-gray-600">Address Line 2: {order.shippingAddress?.addressLine2}</p>
-                                <p className="text-gray-600">City: {order.shippingAddress?.city}</p>
-                                <p className="text-gray-600">State: {order.shippingAddress?.state}</p>
-                                <p className="text-gray-600">Postal Code: {order.shippingAddress?.postalCode}</p>
-                                <p className="text-gray-600">Country: {order.shippingAddress?.country}</p>
-                            </div>
-
-                            <div className="border-t border-gray-200 pt-4">
-                                <h3 className="text-lg font-semibold text-gray-700 mb-4">Products:</h3>
-                                <div className="space-y-4">
-                                    {order.products.map((product, productIndex) => (
-                                        <div 
-                                            key={product.productId + '-' + productIndex} 
-                                            className="flex flex-col sm:flex-row items-start sm:items-center border-b border-gray-200 pb-4"
-                                        >
-                                            <div className="w-24 h-24 sm:w-28 sm:h-28 overflow-hidden rounded-lg mr-0 sm:mr-4 mb-4 sm:mb-0">
-                                                {product.productImage?.map((image, imgIndex) => (
-                                                    <img
-                                                        key={imgIndex}
-                                                        src={image}
-                                                        alt={`Product ${product.productName} - ${imgIndex + 1}`}
-                                                        className="w-full h-full object-cover"
-                                                    />
-                                                ))}
-                                            </div>
-                                            <div className="flex-1">
-                                                <p className="text-gray-800 font-semibold">{product.productName}</p>
-                                                <p className="text-gray-600">Quantity: {product.quantity}</p>
-                                                <p className="text-gray-600">Size:{product.size}</p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                        </div>
-                    ))}
+              <div className="border-t border-gray-200 pt-4">
+                <h3 className="text-lg font-semibold text-gray-700 mb-4">
+                  Products:
+                </h3>
+                <div className="space-y-4">
+                  {order.products.map((product, productIndex) => (
+                    <div
+                      key={`${product.productId}-${productIndex}`}
+                      className="flex flex-col sm:flex-row items-start sm:items-center border-b border-gray-200 pb-4"
+                    >
+                      <div className="w-24 h-24 sm:w-28 sm:h-28 overflow-hidden rounded-lg mr-0 sm:mr-4 mb-4 sm:mb-0">
+                        {product.productImage?.map((image, imgIndex) => (
+                          <img
+                            key={imgIndex}
+                            src={image}
+                            alt={`Product ${product.productName} - ${
+                              imgIndex + 1
+                            }`}
+                            className="w-full h-full object-cover"
+                          />
+                        ))}
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-gray-800 font-semibold">
+                          {product.productName}
+                        </p>
+                        <p className="text-gray-600">
+                          Quantity: {product.quantity}
+                        </p>
+                        <p className="text-gray-600">Size: {product.size}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-            )}
+              </div>
+            </div>
+          ))}
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default Orderdetailsadmin;
+
+
+
+

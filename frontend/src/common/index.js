@@ -129,6 +129,10 @@ const SummaryApi = {
         url : `${backendDomin}/api/allcateg`,
         method : 'get'
     },
+    cancelOrder:{
+        url : `${backendDomin}/api/orders/cancel`,
+        method : 'patch'
+    }
     
     
     

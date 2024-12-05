@@ -170,60 +170,132 @@
 
 // new 
 
-const mongoose = require('mongoose');
-const { v4: uuidv4 } = require('uuid'); // Import uuid to generate unique IDs
+// const mongoose = require('mongoose');
+// const { v4: uuidv4 } = require('uuid'); // Import uuid to generate unique IDs
 
-const OrderSchema = new mongoose.Schema({
-    orderId: { type: String, unique: true, default: uuidv4 }, // Add unique orderId
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    products: [
-        {
-            productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
-            productName: { type: String }, // Add product name
-            productImage: { type: [String] }, // Add product image
-            size: { type: String }, // Add size field here
-            quantity: { type: Number, required: true },
-        },
-    ],
-    totalAmount: { type: Number, required: true },
-    shippingAddress: {
-        name: String,
-        addressLine1: String,
-        addressLine2: String,
-        city: String,
-        state: String,
-        postalCode: String,
-        country: String,
-    },
-    status: { type: String, default: 'Pending' },
-    createdAt: { type: Date, default: Date.now },
-});
-
-module.exports = mongoose.model('Order', OrderSchema);
-
+// const OrderSchema = new mongoose.Schema({
+//     orderId: { type: String, unique: true, default: uuidv4 }, // Add unique orderId
+//     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+//     products: [
+//         {
+//             productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
+//             productName: { type: String }, // Add product name
+//             productImage: { type: [String] }, // Add product image
+//             size: { type: String }, // Add size field here
+//             quantity: { type: Number, required: true },
+//         },
+//     ],
+//     totalAmount: { type: Number, required: true },
+//     shippingAddress: {
+//         name: String,
+//         addressLine1: String,
+//         addressLine2: String,
+//         city: String,
+//         state: String,
+//         postalCode: String,
+//         country: String,
+//     },
+//     status: { type: String, default: 'Pending' },
+//     createdAt: { type: Date, default: Date.now },
+// });
 
 // module.exports = mongoose.model('Order', OrderSchema);
 
 
 
-// const mongoose = require('mongoose');
 
-// const orderSchema = new mongoose.Schema({
-//     orderId: String,
-//     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-//     products: [
-//         {
-//             productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
-//             quantity: Number,
-//             productName: String, // If you need to save the name for display purposes
-//             productImage: [String], // Allow multiple image URLs
-//         }
-//     ],
-//     totalAmount: Number,
-//     shippingAddress: String,
-//     status: { type: String, default: 'Pending' }
-// });
+const mongoose = require('mongoose');
+const { v4: uuidv4 } = require('uuid'); // Import uuid to generate unique IDs
 
-// const Order = mongoose.model('Order', orderSchema);
-// module.exports = Order;
+const OrderSchema = new mongoose.Schema({
+    orderId: { 
+        type: String, 
+        unique: true, 
+        default: uuidv4 
+    }, // Unique orderId for external references
+    userId: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User', 
+        required: true 
+    },
+    products: [
+        {
+            productId: { 
+                type: mongoose.Schema.Types.ObjectId, 
+                ref: 'Product', 
+                required: true 
+            },
+            productName: { 
+                type: String, 
+                required: true 
+            }, // Product name is required for display purposes
+            productImage: { 
+                type: [String], 
+                default: [] 
+            }, // Default to an empty array for safety
+            size: { 
+                type: String, 
+                default: 'N/A' 
+            }, // Default size to 'N/A' if not applicable
+            quantity: { 
+                type: Number, 
+                required: true, 
+                min: 1 
+            }, // Ensure quantity is at least 1
+        },
+    ],
+    totalAmount: { 
+        type: Number, 
+        required: true, 
+        min: 0 
+    }, // Ensure total amount is non-negative
+    shippingAddress: {
+        name: { 
+            type: String, 
+            required: true 
+        },
+        addressLine1: { 
+            type: String, 
+            required: true 
+        },
+        addressLine2: { 
+            type: String 
+        },
+        city: { 
+            type: String, 
+            required: true 
+        },
+        state: { 
+            type: String, 
+            required: true 
+        },
+        postalCode: { 
+            type: String, 
+            required: true 
+        },
+        country: { 
+            type: String, 
+            required: true 
+        },
+    },
+    status: { 
+        type: String, 
+        enum: ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'], 
+        default: 'Pending' 
+    }, // Enforce specific status values
+    createdAt: { 
+        type: Date, 
+        default: Date.now 
+    },
+    updatedAt: { 
+        type: Date 
+    }, // Add an optional updated timestamp
+});
 
+OrderSchema.pre('save', function (next) {
+    // Automatically set updatedAt before saving if modified
+    this.updatedAt = new Date();
+    next();
+});
+
+module.exports = mongoose.model('Order', OrderSchema);
